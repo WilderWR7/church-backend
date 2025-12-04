@@ -20,6 +20,7 @@ import { RawHeaders } from './decorators/raw-headers.decorator';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { RoleProtected } from './decorators/role-protected.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -34,7 +35,7 @@ export class AuthController {
   loginUser(@Body() loginUserDto: LoginDto) {
     return this.authService.login(loginUserDto);
   }
-
+  @ApiBearerAuth()
   @Get('check-status')
   @Auth()
   checkAuthStatus(@GetUser() user: User) {
